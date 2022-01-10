@@ -39,12 +39,12 @@ $(document).ready(function() {
 				e.preventDefault();
 				
 				if ($(this).closest('li').children('ul').length == 0) {
-					$(this).closest('li').append('<ul style="padding-top: 0.75rem;" class="list-group" count="1"></ul>');
+					$(this).closest('li').append('<ul class="list-group default-padding" parent-count="1"></ul>');
 				}
 				
 				var level = $(this).closest('li').parents('ul').length;
 				
-				var count = $(this).closest('li').children('ul').attr('count');
+				var count = $(this).closest('li').children('ul').attr('parent-count');
 				var catNumber = count;
 				
 				if (level > 1) {
@@ -56,17 +56,17 @@ $(document).ready(function() {
 					//var parentId = $(this).closest('li > div').children('span').text().replace("Category ", "");
 
 					$($(this).closest('li').parents('li:not(:last)').get().reverse()).each(function() {
-							catNumber += $(this).attr('id') + '.';
+							catNumber += $(this).attr('count') + '.';
 					});
 					
-					catNumber += $(this).closest('li').attr('id') + '.';
+					catNumber += $(this).closest('li').attr('count') + '.';
 					catNumber += count;
 				}
 				
-				$(this).closest('li').children('ul').append('<li class="list-group-item" id=' + count + '><div><span>Category ' + catNumber + '</span> - <a href="#">edit</a> | <a href="#">delete</a> | <a href="#">add a child</a></div></li>');
+				$(this).closest('li').children('ul').append('<li class="list-group-item" count=' + count + '><div><span>Category ' + catNumber + '</span> - <a href="#">edit</a> | <a href="#">delete</a> | <a href="#">add a child</a></div></li>');
 				
 				count++;
-				$(this).closest('li').children('ul').attr('count', count);
+				$(this).closest('li').children('ul').attr('parent-count', count);
 			});
 			
 		});
